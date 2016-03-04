@@ -1,0 +1,14 @@
+Program Name:,,,
+,lin,quad,matmult
+,,,
+Runtime when n = 10,0.007,0.002,0.038
+Runtime when n = 100,0.042,0.003,0.142
+Runtime when n = 200,,,
+Runtime when n = 400,,,0.599
+Runtime when n = 800,,,5.13
+Runtime when n = 1000,0.358,0.012,
+Runtime when n = 1600,,,0.838
+Runtime when n = 5000,,,
+Runtime when n = 10000,3.65,1.35,35.16085
+,,,
+Runtime when n = 100000,38.327,18.588,
