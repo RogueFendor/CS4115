@@ -169,7 +169,7 @@ typedef vector<sparseRow> sparseMat;
 void readMat(sparseMat&, int&); // read from stdin
 void transpMat(const sparseMat, sparseMat&); // first arg is mat to transpose;
 void multMat(const sparseMat, const sparseMat, sparseMat&);
-double dotProd(const sparseRow, const sparseRow);
+double dotProd(const sparseRow, const sparseMat);
 void outMat(const sparseMat);
 //  second is passed by reference
 //  so this will be the transpose
@@ -271,9 +271,9 @@ void multMat(const sparseMat m1, const sparseMat m2, sparseMat& res)
   need to iterate row by row but each row of A needs to be multiplied
   by every row of transpose parse transpose and do this again.
   **/
-    sparseRow trans = transp[c];
+
     sparseRow mat  = m1[c];
-    double val = dotProd(mat,trans);
+    double val = dotProd(mat,transp);
     nz.setColPos(c);
     nz.setColVal(val);
     row.push_back(nz);
@@ -283,7 +283,7 @@ void multMat(const sparseMat m1, const sparseMat m2, sparseMat& res)
   row.clear();
 }
 
-double dotProd(sparseRow r1, sparseRow r2)
+double dotProd(sparseRow r1, sparseMat r1)
 {
   
   double val =0;
@@ -292,13 +292,12 @@ double dotProd(sparseRow r1, sparseRow r2)
   sparseRow::iterator rowMatA;
   int ctr1=0;
   int ctr=0;
-   for (rowMatA = r1.begin(); rowMatA != r1.end(); rowMatA++)
+   for (int i = 0;i< r1.size();i++)
    {
      nz1.setValues(rowMatA->getcolPos(),rowMatA->getColVal());
-      cout<<"outer "<<ctr<<"\n";
+    
      for (rowMatB = r2.begin(); rowMatB != r2.end(); rowMatB++)
      {
-       cout<<"inner "<<ctr1<<"\n";
        /*if(nz1.getcolPos() == rowMatB->getcolPos()){
          val = val + nz1.getColVal() * rowMatB->getColVal();
        
